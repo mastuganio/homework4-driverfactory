@@ -1,14 +1,9 @@
 package com.mastugan.internal;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.edge.EdgeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.opera.OperaDriver;
 
 public final class WebDriverFactory {
 
@@ -17,24 +12,24 @@ public final class WebDriverFactory {
     private WebDriverFactory() {
     }
 
-    public static WebDriver create(Driver name) {
+    public static WebDriver create(Driver driver) {
         WebDriver wd = null;
-        switch (name) {
+        switch (driver) {
             case CHROME:
-                WebDriverManager.chromedriver().setup();
-                wd = new ChromeDriver();
+                Driver.CHROME.setup();
+                wd = Driver.CHROME.create();
                 break;
             case FIREFOX:
-                WebDriverManager.firefoxdriver().setup();
-                wd = new FirefoxDriver();
+                Driver.FIREFOX.setup();
+                wd = Driver.FIREFOX.create();
                 break;
             case EDGE:
-                WebDriverManager.edgedriver().setup();
-                wd = new EdgeDriver();
+                Driver.EDGE.setup();
+                wd = Driver.EDGE.create();
                 break;
             case OPERA:
-                WebDriverManager.operadriver().setup();
-                wd = new OperaDriver();
+                Driver.OPERA.setup();
+                wd = Driver.OPERA.create();
                 break;
         }
         LOGGER.info("Init WebDriver");
@@ -45,20 +40,20 @@ public final class WebDriverFactory {
         WebDriver wd = null;
         switch (driver) {
             case CHROME:
-                WebDriverManager.chromedriver().setup();
-                wd = new ChromeDriver(options);
+                Driver.CHROME.setup();
+                wd = Driver.CHROME.create(options);
                 break;
             case FIREFOX:
-                WebDriverManager.firefoxdriver().setup();
-                wd = new FirefoxDriver(options);
+                Driver.FIREFOX.setup();
+                wd = Driver.FIREFOX.create(options);
                 break;
             case EDGE:
-                WebDriverManager.edgedriver().setup();
-                wd = new EdgeDriver(options);
+                Driver.EDGE.setup();
+                wd = Driver.EDGE.create(options);
                 break;
             case OPERA:
-                WebDriverManager.operadriver().setup();
-                wd = new OperaDriver(options);
+                Driver.OPERA.setup();
+                wd = Driver.OPERA.create(options);
                 break;
         }
         LOGGER.info("Init WebDriver");

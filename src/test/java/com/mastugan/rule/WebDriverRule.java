@@ -40,7 +40,6 @@ public class WebDriverRule extends ExternalResource {
 
     @Override
     protected void before() {
-
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         driver.manage().window().maximize();
     }

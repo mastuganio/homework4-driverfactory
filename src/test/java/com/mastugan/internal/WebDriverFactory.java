@@ -8,6 +8,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.opera.OperaDriver;
 
 public final class WebDriverFactory {
 
@@ -31,6 +32,10 @@ public final class WebDriverFactory {
                 WebDriverManager.edgedriver().setup();
                 wd = new EdgeDriver();
                 break;
+            case OPERA:
+                WebDriverManager.operadriver().setup();
+                wd = new OperaDriver();
+                break;
         }
         LOGGER.info("Init WebDriver");
         return wd;
@@ -51,6 +56,10 @@ public final class WebDriverFactory {
                 WebDriverManager.edgedriver().setup();
                 wd = new EdgeDriver(options);
                 break;
+            case OPERA:
+                WebDriverManager.operadriver().setup();
+                wd = new OperaDriver(options);
+                break;
         }
         LOGGER.info("Init WebDriver");
         return wd;
@@ -58,12 +67,11 @@ public final class WebDriverFactory {
 
     public static WebDriver create() {
         String browser = RunProperties.getProperty(RunProperties.BROWSER);
-        if(browser != null) {
+        if (browser != null) {
             try {
                 Driver result = Driver.valueOf(browser.toUpperCase());
                 return create(result);
-            }
-            catch (IllegalArgumentException e) {
+            } catch (IllegalArgumentException e) {
                 LOGGER.error("Wrong {}=\"{}\".  ", RunProperties.BROWSER, browser);
             }
         }

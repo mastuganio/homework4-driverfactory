@@ -46,16 +46,7 @@ public final class WebDriverFactory {
     }
 
     private static <T extends MutableCapabilities> WebDriver init(Driver driver, T option) {
-        assertBrowserOptions(option.getClass(), driver.getOptionsType());
         driver.setup();
         return driver.create(option);
-    }
-
-    private static void assertBrowserOptions(Class<? extends MutableCapabilities> expected, Class<? extends MutableCapabilities> actual) {
-        if (!actual.equals(expected)) {
-            final String message = String.format("Invalid option! Need: %s, but was: %s", expected.getSimpleName(), actual.getSimpleName());
-            LOGGER.error(message);
-            throw new AssertionError(message);
-        }
     }
 }

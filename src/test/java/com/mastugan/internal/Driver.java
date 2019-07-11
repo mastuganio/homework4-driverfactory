@@ -20,15 +20,12 @@ public enum Driver {
         }
 
         public <T extends MutableCapabilities> WebDriver create(T options) {
-            return new ChromeDriver(options);
+            final ChromeOptions opt = new ChromeOptions().merge(options);
+            return new ChromeDriver(opt);
         }
 
         public void setup() {
             WebDriverManager.chromedriver().setup();
-        }
-
-        public Class<? extends MutableCapabilities> getOptionsType() {
-            return ChromeOptions.class;
         }
     },
     FIREFOX {
@@ -37,15 +34,12 @@ public enum Driver {
         }
 
         public <T extends MutableCapabilities> WebDriver create(T options) {
-            return new FirefoxDriver(options);
+            final FirefoxOptions opt = new FirefoxOptions().merge(options);
+            return new FirefoxDriver(opt);
         }
 
         public void setup() {
             WebDriverManager.firefoxdriver().setup();
-        }
-
-        public Class<? extends MutableCapabilities> getOptionsType() {
-            return FirefoxOptions.class;
         }
     },
     EDGE {
@@ -54,15 +48,12 @@ public enum Driver {
         }
 
         public <T extends MutableCapabilities> WebDriver create(T options) {
-            return new EdgeDriver(options);
+            final EdgeOptions opt = new EdgeOptions().merge(options);
+            return new EdgeDriver(opt);
         }
 
         public void setup() {
             WebDriverManager.edgedriver().setup();
-        }
-
-        public Class<? extends MutableCapabilities> getOptionsType() {
-            return EdgeOptions.class;
         }
     },
     OPERA {
@@ -71,16 +62,14 @@ public enum Driver {
         }
 
         public <T extends MutableCapabilities> WebDriver create(T options) {
-            return new OperaDriver(options);
+            final OperaOptions opt = new OperaOptions().merge(options);
+            return new OperaDriver(opt);
         }
 
         public void setup() {
             WebDriverManager.operadriver().setup();
         }
 
-        public Class<? extends MutableCapabilities> getOptionsType() {
-            return OperaOptions.class;
-        }
     };
 
     public abstract WebDriver create();
@@ -88,7 +77,5 @@ public enum Driver {
     public abstract <T extends MutableCapabilities> WebDriver create(T options);
 
     public abstract void setup();
-
-    public abstract Class<? extends MutableCapabilities> getOptionsType();
 
 }
